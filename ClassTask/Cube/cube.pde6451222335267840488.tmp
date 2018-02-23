@@ -1,0 +1,97 @@
+//ルービックキューブ
+//2014/07/22
+//4-43 Fukuchi Tsubasa
+
+float boxSize = 20;    //立方体のサイズ
+float distance1 = 30;    //立方体同士の距離
+float distance2 = 60;
+float distance = 30;
+float halfDis;    //立方体同士の一辺の全体の距離の半分
+float halfDis1;
+float halfDis2;
+int boxNum = 6;    //立方体の数
+float rotX = 0;
+float rotY = 0;
+float rotZ = 0;
+
+void setup() {
+  size(700, 700, P3D);
+  halfDis = distance*(boxNum-1)/2;    //6個並んだ際の距離の半分
+  halfDis2 = distance2*(boxNum-1)/2;
+  halfDis1 = distance1*(boxNum-1)/2;
+}
+
+void draw() {
+  background(200);
+  lights();
+  ambientLight(63, 31, 31);
+  directionalLight(255, 255, 255, -1, 0, 0);
+  pointLight(63, 127, 255, mouseX, mouseY, 200);
+  spotLight(100, 100, 100, mouseX, mouseY, 200, 0, 0, -1, PI, 2);
+  pushMatrix();
+  translate(width/2, height/2);
+  rotateY(radians(mouseX));
+  rotateX(radians(mouseY));
+  noFill();
+  box(width, height, -700);
+  popMatrix();
+  stroke(255, 0, 0, 100);
+  line(width/2, 0, width/2, height);
+  line(0, height/2, width, height/2);
+
+  translate(width/2, height/2);    //立体の中心を画面中央に移動   
+  rotateY(radians(mouseX));
+  rotateX(radians(mouseY));
+
+  stroke(0);
+  fill(255, 255, 255);
+
+  drawBox(boxSize, distance1, halfDis1, boxNum);
+  drawSquare(boxSize, distance1, halfDis1, boxNum);
+  drawPoint(boxSize, distance, halfDis, boxNum);
+  drawPoint(boxSize, distance2, halfDis2, boxNum);
+
+  //立体をテンポよく動かす
+  if (frameCount%3==0) {
+    distance2 = distance2 + 3;
+    halfDis2 = distance2*(boxNum-1)/2;
+    if (distance2>=75) {
+      distance2 = 60;
+    }
+  }
+  if (frameCount%3==0) {
+    distance = distance + 2;
+    halfDis = distance*(boxNum-1)/2;
+    if (distance>=40) {
+      distance = 30;
+    }
+  }
+}
+
+void keyPressed(){
+  switch(keyCode){
+    
+    case UP:
+    break;
+    
+    case RIGHT:
+    break;
+    
+    case LEFT:
+    break;
+    
+    case DOWN:
+    break;
+    
+    case ENTER:
+    break;
+    
+    case BACKSPACE:
+    break;
+    
+    default:
+    break;
+    
+  }
+}
+
