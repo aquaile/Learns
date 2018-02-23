@@ -1,0 +1,6 @@
+framework module Pods_testSwifty {
+  umbrella header "Pods-testSwifty-umbrella.h"
+
+  export *
+  module * { export * }
+}
